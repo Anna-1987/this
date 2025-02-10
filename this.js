@@ -145,21 +145,44 @@
 // ********** ТРЕНИРУЕМСЯ 4 *********
 
 
-const mackChangeColor = function () {
-    const changeColor = function (color) {
-        console.log('changeColor -> this', this);
-    };
+// const mackChangeColor = function () {
+//     const changeColor = function (color) {
+//         console.log('changeColor -> this', this);
+//     };
 
-    return changeColor;
+//     return changeColor;
+// };
+
+//     const updateColor = mackChangeColor();
+//     updateColor('red');
+
+
+// const hat = {
+//     color: 'biue',
+//     updateColor,
+// };
+
+// hat.updateColor('orange');
+
+
+// ********** ТРЕНИРУЕМСЯ 4 *********
+
+const counter = {
+    value: 0,
+    increment(value) {
+        console.log('this.increment -> this', this);
+        this.value += value;
+    },
+    decrement(value) {
+        console.log('this.decrement -> this', this);
+        this.value -= value;
+    },
+};
+const updateCounter = function (value, operation) {
+    // counter.increment();
+    // counter.decrement();
+    operation(value);
 };
 
-    const updateColor = mackChangeColor();
-    updateColor('red');
-
-
-const hat = {
-    color: 'biue',
-    updateColor,
-};
-
-hat.updateColor('orange');
+updateCounter(10, counter.increment);
+updateCounter(5, counter.decrement);
