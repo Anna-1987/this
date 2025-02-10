@@ -53,15 +53,113 @@
 // ******* Вызов без контекста, но объявленна как метод объекта
 
 
-const user = {
-    tag: 'Mango',
-    showTag() {
-        console.log('showTag -> this', this);
-        console.log('showTag -> this.tag', this.tag);
-    },
+// const user = {
+//     tag: 'Mango',
+//     showTag() {
+//         console.log('showTag -> this', this);
+//         console.log('showTag -> this.tag', this.tag);
+//     },
+// };
+
+// user.showTag();
+// const outerShowTag = user.showTag;
+
+// outerShowTag();
+
+
+//******-----------  Контекст в callback-функциях
+
+// const userCallback = {
+//     tag:'Mango',
+//     showTag() {
+//         console.log('showTag -> this', this);
+//         console.log('showTag -> this.tag', this.tag);
+//     },
+// }
+
+// const invokeAction = function (action) {
+//     console.log(action);
+
+//     action();
+// };
+
+// invokeAction(userCallback.showTag);
+
+
+// ********** ТРЕНИРУЕМСЯ 1 *********
+
+// const fn = function () {
+//     console.log('fn -> this', this)
+// };
+// fn();
+
+// ********** ТРЕНИРУЕМСЯ 2 *********
+
+// const book = {
+//     title: 'Reach for beginners',
+//     showThis() {
+//         console.log('showThis -> this', this);
+//     },
+//     showTitle() {
+//         console.log('showTitle -> this.title', this.title);
+//     },
+// };
+
+// book.showThis();// ссылка на объект
+
+// const outerShowThis = book.showThis;
+// outerShowThis(); // unefinde
+
+// const outerShowTitle = book.showTitle;
+// outerShowTitle(); // error
+
+
+// ********** ТРЕНИРУЕМСЯ 3 *********
+
+// const mackChangeColor = function () {
+//     const changeColor = function (color) {
+//         console.log('changeColor -> this', this);
+//         // this.color = color;
+//     };
+
+//     // changeColor();
+
+//     const sweater = {
+//         color: 'teal',
+//     };
+
+//     sweater.updateColor = changeColor;
+
+//     sweater.updateColor('red');
+
+
+//     return sweater.updateColor;
+// };
+
+// const swapColor = mackChangeColor();
+
+// swapColor('blue');
+
+
+
+// ********** ТРЕНИРУЕМСЯ 4 *********
+
+
+const mackChangeColor = function () {
+    const changeColor = function (color) {
+        console.log('changeColor -> this', this);
+    };
+
+    return changeColor;
 };
 
-user.showTag();
-const outerShowTag = user.showTag;
+    const updateColor = mackChangeColor();
+    updateColor('red');
 
-outerShowTag();
+
+const hat = {
+    color: 'biue',
+    updateColor,
+};
+
+hat.updateColor('orange');
